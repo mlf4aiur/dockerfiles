@@ -14,7 +14,7 @@ RUN apt-get update && \
     apt-get install -y -q --no-install-recommends opscenter && \
     rm -rf /var/lib/apt/lists/*
 
-VOLUME ["/etc/opscenter/clusters"]
+VOLUME ["/etc/opscenter/"]
 
 EXPOSE 8888
 
