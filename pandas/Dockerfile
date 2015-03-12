@@ -5,7 +5,8 @@ MAINTAINER Kevin Li <mlf4aiur@gmail.com>
 RUN apt-get update && apt-get install -y -q --no-install-recommends \
     python \
     ipython-notebook \
-    python-pandas
+    python-pandas && \
+    rm -rf /var/lib/apt/lists/*
 
 VOLUME /notebooks
 WORKDIR /notebooks
