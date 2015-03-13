@@ -12,6 +12,8 @@ RUN apt-get update && \
     curl -s -L http://debian.datastax.com/debian/repo_key | apt-key add - && \
     apt-get update && \
     apt-get install -y -q --no-install-recommends opscenter && \
+    && echo "[labs]" >> /etc/opscenter/opscenterd.conf \
+    && echo "orbited_longpoll = true" >> /etc/opscenter/opscenterd.conf \
     rm -rf /var/lib/apt/lists/*
 
 VOLUME ["/etc/opscenter/"]
