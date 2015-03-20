@@ -13,6 +13,7 @@ RUN apt-get update \
     && apt-get update \
     && apt-get install -y -q --no-install-recommends \
         sudo \
+        supervisor \
         sysstat \
         dsc21 \
         datastax-agent \
@@ -25,9 +26,10 @@ ENV SEED_IP 127.0.0.1
 VOLUME ["/var/lib/cassandra/"]
 
 COPY docker-entrypoint.sh /
+COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
 
 EXPOSE 7199 7000 7001 9160 9042
 
-CMD ["/usr/sbin/cassandra", "-f"]
+CMD ["/usr/bin/supervisord"]
