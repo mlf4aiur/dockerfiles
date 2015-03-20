@@ -19,7 +19,6 @@ Start Cassandra cluster with OpsCenter
     done
 
     # Start OpsCenter agent
-    sleep 30
     docker exec -t -i cass_seed service datastax-agent start
     for n in {2..3}
     do
@@ -27,7 +26,7 @@ Start Cassandra cluster with OpsCenter
     done
 
     # Setup Opscenter cluster
-    sleep 3
+    sleep 40
     opscenter_ip=$(docker inspect -f '{{ .NetworkSettings.IPAddress }}' opscenter)
     seed_ip=$(docker inspect -f '{{ .NetworkSettings.IPAddress }}' cass_seed)
 
@@ -43,3 +42,9 @@ Start Cassandra cluster with OpsCenter
             \"port\": \"7199\"
           }
       }" http://${opscenter_ip}:8888/cluster-configs
+
+Stop cassandra inside the container
+-----------------------------------
+
+    docker exec -t -i cass_3 supervisorctl stop cassandra
+
