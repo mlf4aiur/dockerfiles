@@ -1,12 +1,13 @@
-FROM ubuntu:14.04
+FROM debian:wheezy
 
 MAINTAINER Kevin Li <mlf4aiur@gmail.com>
 
-RUN apt-get update && apt-get install -y -q --no-install-recommends \
-    python \
-    ipython-notebook \
-    python-pandas && \
-    rm -rf /var/lib/apt/lists/*
+RUN apt-get update \
+    && apt-get install -y -q --no-install-recommends \
+        python \
+        ipython-notebook \
+        python-pandas \
+    && rm -rf /var/lib/apt/lists/*
 
 VOLUME /notebooks
 WORKDIR /notebooks
