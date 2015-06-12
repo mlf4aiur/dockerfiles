@@ -1,16 +1,14 @@
-# Version 2.1.0
-
 FROM debian:wheezy
-
-ENV DEBIAN_FRONTEND noninteractive
 
 MAINTAINER Kevin Li <mlf4aiur@gmail.com>
 
-RUN apt-get update \
+ENV VERSION 2.0.2
+
+RUN DEBIAN_FRONTEND noninteractive apt-get update \
     && apt-get install -y -q --no-install-recommends wget \
         ca-certificates \
     && mkdir -p /opt/grafana \
-    && wget -q https://grafanarel.s3.amazonaws.com/builds/grafana-latest.linux-x64.tar.gz -O /grafana.tar.gz \
+    && wget -q https://grafanarel.s3.amazonaws.com/builds/grafana-${VERSION}.linux-x64.tar.gz -O /grafana.tar.gz \
     && tar zxf /grafana.tar.gz -C /opt/grafana --strip-components 1 \
     && rm /grafana.tar.gz \
     && apt-get clean \
