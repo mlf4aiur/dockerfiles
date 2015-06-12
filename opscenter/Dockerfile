@@ -1,12 +1,10 @@
-# Version 5.1.0
+# Version 5.1.3
 
-FROM ubuntu:14.04
-
-ENV DEBIAN_FRONTEND noninteractive
+FROM debian:wheezy
 
 MAINTAINER Kevin Li <mlf4aiur@gmail.com>
 
-RUN apt-get update \
+RUN DEBIAN_FRONTEND=noninteractive apt-get update \
     && apt-get install -y -q --no-install-recommends curl \
     && echo "deb http://debian.datastax.com/community stable main" > /etc/apt/sources.list.d/cassandra.sources.list \
     && curl -s -L http://debian.datastax.com/debian/repo_key | apt-key add - \
