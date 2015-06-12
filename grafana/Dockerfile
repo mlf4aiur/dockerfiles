@@ -4,7 +4,7 @@ MAINTAINER Kevin Li <mlf4aiur@gmail.com>
 
 ENV VERSION 2.0.2
 
-RUN DEBIAN_FRONTEND noninteractive apt-get update \
+RUN DEBIAN_FRONTEND=noninteractive apt-get update \
     && apt-get install -y -q --no-install-recommends wget \
         ca-certificates \
     && mkdir -p /opt/grafana \
