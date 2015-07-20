@@ -7,11 +7,13 @@ ENV BUILD 271043
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get update \
     && apt-get install -y -q --no-install-recommends wget procps \
-    && wget -O - \
+    && wget -q -O - \
         http://download.splunk.com/products/splunk/releases/${VERSION}/splunk/linux/splunk-${VERSION}-${BUILD}-Linux-x86_64.tgz | \
         tar xz -C /opt \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /opt/splunk/
 
 # Splunk web port
 EXPOSE 8000

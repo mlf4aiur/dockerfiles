@@ -16,3 +16,4 @@ Usage
         -p 9997:9997 \
         -v `pwd`/var:/opt/splunk/var \
         mlf4aiur/splunk
+
