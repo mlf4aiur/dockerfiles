@@ -2,7 +2,7 @@ FROM debian:wheezy
 
 MAINTAINER Kevin Li <mlf4aiur@gmail.com>
 
-ENV VERSION 2.0.2
+ENV VERSION 2.1.1
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get update \
     && apt-get install -y -q --no-install-recommends wget \
