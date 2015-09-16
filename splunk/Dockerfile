@@ -2,8 +2,8 @@ FROM debian:wheezy
 
 MAINTAINER Kevin Li <mlf4aiur@gmail.com>
 
-ENV VERSION 6.2.4
-ENV BUILD 271043
+ENV VERSION 6.2.6
+ENV BUILD 271160
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get update \
     && apt-get install -y -q --no-install-recommends wget procps \
