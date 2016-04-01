@@ -9,6 +9,8 @@ RUN pip install Flask==0.10.1
 
 COPY hello.py /myapp/hello.py
 
+EXPOSE 5000
+
 VOLUME ["/myapp"]
 
 CMD ["python", "./hello.py"]
