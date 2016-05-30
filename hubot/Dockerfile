@@ -12,7 +12,7 @@ RUN \
         nodejs \
         tini \
     && npm install -g npm \
-    && mkdir -p /root/mybot/bin /root/.config/configstore/ \
+    && mkdir -p /root/mybot/bin /root/.config/configstore/ /root/node_modules \
     && npm install -g yo generator-hubot \
     && chmod -R g+rwx /root/ \
     && yes | yo hubot \
@@ -25,6 +25,7 @@ RUN \
     && rm -rf /tmp/* \
         /usr/lib/node_modules/npm/man \
         /usr/lib/node_modules/npm/doc/usr/lib/node_modules/npm/html \
+        /root/node_modules \
         /root/mybot/hubot-scripts.json \
         /var/cache/apk/*
 
