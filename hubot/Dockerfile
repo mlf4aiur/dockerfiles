@@ -4,16 +4,17 @@ MAINTAINER Kevin Li <mlf4aiur@gmail.com>
 
 ARG built_on="Unknown"
 
+WORKDIR /root/mybot
+
 RUN \
     apk add --update \
         --repository https://dl-cdn.alpinelinux.org/alpine/edge/community/ \
         nodejs \
         tini \
     && npm install -g npm \
-    && mkdir -p /root/mybot/bin /root/.config/configstore/ /root/node_modules \
-    && chmod -R g+rwx /root/ \
-    && cd /root/mybot \
+    && mkdir -p /root/mybot/bin /root/.config/configstore/ \
     && npm install -g yo generator-hubot \
+    && chmod -R g+rwx /root/ \
     && yes | yo hubot \
         --owner="Kevin Li <mlf4aiur@gmail.com>" \
         --name="Hubot" \
@@ -30,8 +31,6 @@ RUN \
 VOLUME ["/root/mybot"]
 
 LABEL build.on=$built_on
-
-WORKDIR /root/mybot
 
 ENTRYPOINT ["/sbin/tini", "--"]
 
