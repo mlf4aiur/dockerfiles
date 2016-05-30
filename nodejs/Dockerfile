@@ -9,4 +9,9 @@ RUN \
         --repository https://dl-cdn.alpinelinux.org/alpine/edge/community/ \
         nodejs \
     && npm install -g npm \
-    && rm -rf /var/cache/apk/*
+    && find /usr/lib/node_modules/npm -name test -o -name .bin -type d | xargs rm -rf; \
+    && rm -rf /tmp/* \
+        /root/.npm \
+        /usr/lib/node_modules/npm/man \
+        /usr/lib/node_modules/npm/doc/usr/lib/node_modules/npm/html \
+        /var/cache/apk/*
