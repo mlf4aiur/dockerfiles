@@ -9,7 +9,7 @@ RUN \
         --repository https://dl-cdn.alpinelinux.org/alpine/edge/community/ \
         nodejs \
     && npm install -g npm \
-    && find /usr/lib/node_modules/npm -name test -o -name .bin -type d | xargs rm -rf; \
+    && find /usr/lib/node_modules/npm -name test -o -name .bin -type d | xargs rm -rf \
     && rm -rf /tmp/* \
         /root/.npm \
         /usr/lib/node_modules/npm/man \
