@@ -8,6 +8,5 @@ RUN \
     apk add --update \
         --repository https://dl-cdn.alpinelinux.org/alpine/edge/community/ \
         nodejs \
-    && npm install -g npm
-
+    && npm install -g npm \
     && rm -rf /var/cache/apk/*
