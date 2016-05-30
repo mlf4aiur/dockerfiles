@@ -10,7 +10,7 @@ RUN \
         nodejs \
         tini \
     && npm install -g npm \
-    && mkdir -p /root/mybot/bin /root/.config/configstore/ \
+    && mkdir -p /root/mybot/bin /root/.config/configstore/ /root/node_modules \
     && chmod -R g+rwx /root/ \
     && cd /root/mybot \
     && npm install -g yo generator-hubot \
