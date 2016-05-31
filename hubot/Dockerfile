@@ -11,6 +11,8 @@ RUN \
         --repository https://dl-cdn.alpinelinux.org/alpine/edge/community/ \
         nodejs \
         tini \
+        ca-certificates \
+    && update-ca-certificates \
     && npm install -g npm \
     && mkdir -p /root/mybot/bin /root/.config/configstore/ /root/node_modules \
     && npm install -g yo generator-hubot \
