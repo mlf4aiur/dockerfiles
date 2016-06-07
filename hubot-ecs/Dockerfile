@@ -19,7 +19,7 @@ ADD https://s3.amazonaws.com/amazon-ecs-cli/ecs-cli-linux-amd64-latest /usr/loca
 
 RUN \
     chmod +x /usr/local/bin/ecs-cli \
-    && npm install fs-extra \
+    && npm install -g fs-extra \
     && sed -i \
         -e 's/graceful-fs/fs-extra/' \
         -e 's/fs\.rename/fs.move/' \
