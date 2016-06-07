@@ -4,6 +4,8 @@ MAINTAINER Kevin Li <mlf4aiur@gmail.com>
 
 ARG built_on="Unknown"
 
+WORKDIR /root/mybot
+
 RUN \
     apk add --update \
         --repository https://dl-cdn.alpinelinux.org/alpine/edge/community/ \
@@ -19,12 +21,14 @@ RUN \
     chmod +x /usr/local/bin/ecs-cli \
     && cd $(npm root -g)/npm \
     && npm install fs-extra \
-    && sed -i -e s/graceful-fs/fs-extra/ -e s/fs\.rename/fs.move/ ./lib/utils/rename.js \
+    && sed -i \
+        -e 's/graceful-fs/fs-extra/' \
+        -e 's/fs\.rename/fs.move/' \
+        "$(npm root -g)/npm/lib/utils/rename.js" \
     && npm install -g npm \
     && mkdir -p /root/mybot/bin /root/.config/configstore/ /root/node_modules \
     && npm install -g yo generator-hubot \
     && chmod -R g+rwx /root/ \
-    && cd /root/mybot \
     && yes | yo hubot \
         --name="Hubot" \
         --description="hubot" \
