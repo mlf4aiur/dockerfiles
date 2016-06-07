@@ -29,6 +29,7 @@ RUN \
     && npm install -g yo generator-hubot \
     && chmod -R g+rwx /root/ \
     && yes | yo hubot \
+        --owner="User <user@example.com>" \
         --name="Hubot" \
         --description="hubot" \
         --adapter="slack" \
