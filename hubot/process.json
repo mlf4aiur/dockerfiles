@@ -1,0 +1,24 @@
+{
+  "apps": [
+    {
+      "name": "hubot",
+      "max_memory_restart": "512M",
+      "log_date_format": "YYYY-MM-DD HH:mm:ss SSS",
+      "merge_logs": true,
+      "script": "bin/hubot",
+      "exec_interpreter": "sh",
+      "args": "--name hubot --adapter slack",
+      "watch": [
+        "package.json",
+        "external-scripts.json",
+        "scripts/",
+        "hubot-scripts.json"
+      ],
+      "out_file": "/home/hubot/log/app.log",
+      "error_file": "/home/hubot/log/err.log",
+      "env": {
+        "REDIS_URL": "redis://redis:6379"
+      }
+    }
+  ]
+}

@@ -1,40 +1,35 @@
-FROM alpine:latest
+FROM node:7-alpine
 
 MAINTAINER Kevin Li <mlf4aiur@gmail.com>
 
-ARG built_on="Unknown"
+RUN adduser -D hubot \
+    && npm install -g \
+        pm2 \
+        coffee-script \
+        yo \
+        generator-hubot \
+    && pm2 install pm2-logrotate \
+    && find /usr/local/lib/node_modules/npm -name test -o -name .bin -type d | xargs rm -rf
 
-WORKDIR /root/mybot
+USER hubot
 
-RUN \
-    apk add --update \
-        --repository https://dl-cdn.alpinelinux.org/alpine/edge/community/ \
-        nodejs \
-        tini \
-        ca-certificates \
-    && update-ca-certificates \
-    && npm install -g npm \
-    && mkdir -p /root/mybot/bin /root/.config/configstore/ /root/node_modules \
-    && npm install -g yo generator-hubot \
-    && chmod -R g+rwx /root/ \
-    && yes | yo hubot \
-        --owner="Kevin Li <mlf4aiur@gmail.com>" \
-        --name="Hubot" \
-        --description="hubot" \
+WORKDIR /home/hubot
+
+ENV BOT_NAME "Hubot"
+ENV BOT_OWNER "Kevin Li <mlf4aiur@gmail.com>"
+ENV BOT_DESC "Hubot with slack adapter"
+
+RUN yo hubot \
+        --owner="$BOT_OWNER" \
+        --name="$BOT_NAME" \
+        --description="$BOT_DESC" \
         --adapter="slack" \
-    && sed -i '/hubot-heroku-keepalive/d' /root/mybot/external-scripts.json \
-    && find /usr/lib/node_modules/npm -name test -o -name .bin -type d | xargs rm -rf \
-    && rm -rf /tmp/* \
-        /usr/lib/node_modules/npm/man \
-        /usr/lib/node_modules/npm/doc/usr/lib/node_modules/npm/html \
-        /root/node_modules \
-        /root/mybot/hubot-scripts.json \
-        /var/cache/apk/*
+        --defaults \
+    && sed -i /heroku/d ./external-scripts.json \
+    && npm install \
+        hubot-scripts \
+        hubot-auth
 
-VOLUME ["/root/mybot"]
+COPY process.json /home/hubot
 
-LABEL build.on=$built_on
-
-ENTRYPOINT ["/sbin/tini", "--"]
-
-CMD ["/root/mybot/bin/hubot", "--adapter", "slack"]
+CMD ["pm2", "start", "--no-daemon", "--env", "production", "process.json"]
