@@ -28,6 +28,7 @@ RUN yo hubot \
     && sed -i /heroku/d ./external-scripts.json \
     && npm install \
         hubot-scripts \
+        request \
         hubot-auth
 
 COPY process.json /home/hubot
